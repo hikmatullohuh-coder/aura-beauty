@@ -1,0 +1,7 @@
+### Quality Checks (updated)
+
+- ESLint passed
+- No hardcoded user-facing strings
+- API returns i18n keys
+- orderNumber fully removed from the project
+- Language switcher (RU/UZ) present in header and persists selection via localStorage

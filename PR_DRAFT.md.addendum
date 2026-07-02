@@ -1,0 +1,10 @@
+## Language switcher
+
+A small RU / UZ language switcher has been added to the site header (components/Header.jsx) and is visible on all pages. Behavior:
+
+- Available on all pages: /support, /admin/login, /admin/support, /admin/support/[id], /admin/profile.
+- Selected language is stored in localStorage under key `aura_lang`.
+- On page load the app reads `aura_lang` (default `ru`) and sets i18n language accordingly.
+- Switching language uses i18n.changeLanguage without requiring a page reload and updates UI and toast messages immediately for new events/errors.
+
+Add to PR checklist: ensure language switcher appears and persists selection across reloads.
