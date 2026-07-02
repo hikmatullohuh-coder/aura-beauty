@@ -1,0 +1,13 @@
+/* globals.css */
+
+:root{
+  --brand:#b94f9b;
+  --bg:#fff;
+  --muted:#666;
+  --max-width:1200px;
+}
+
+html,body,#__next{height:100%}
+body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:#faf7fb}
+.container{max-width:var(--max-width);margin:0 auto;padding:20px}
+
