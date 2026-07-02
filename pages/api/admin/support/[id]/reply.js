@@ -1,20 +1,16 @@
-import prisma from '../../../../../lib/prisma'
-import nodemailer from 'nodemailer'
-import { getAdminFromReq } from '../../../../../lib/auth'
-
 export default async function handler(req, res) {
   const admin = await getAdminFromReq(req)
-  if (!admin) return res.status(401).json({ error: 'Unauthorized' })
+  if (!admin) return res.status(401).json({ error: 'auth.unauthorized' })
 
   const { id } = req.query
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+  if (req.method !== 'POST') return res.status(405).json({ error: 'system.method_not_allowed' })
   const { message } = req.body
-  if (!message) return res.status(400).json({ error: 'Message required' })
+  if (!message) return res.status(400).json({ error: 'validation.required_fields' })
 
   try {
     const ticketId = parseInt(id, 10)
     const ticket = await prisma.supportTicket.findUnique({ where: { id: ticketId } })
-    if (!ticket) return res.status(404).json({ error: 'Ticket not found' })
+    if (!ticket) return res.status(404).json({ error: 'system.not_found' })
 
     const msg = await prisma.supportMessage.create({
       data: { ticketId, sender: 'admin', message }
@@ -54,6 +50,6 @@ export default async function handler(req, res) {
     return res.status(201).json({ success: true, message: msg })
   } catch (e) {
     console.error(e)
-    return res.status(500).json({ error: 'Server error' })
+    return res.status(500).json({ error: 'system.server_error' })
   }
 }

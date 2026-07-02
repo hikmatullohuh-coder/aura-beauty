@@ -40,7 +40,8 @@ export default function SupportPage() {
       setForm({ name: '', email: '', phone: '', topic: 'general', message: '' })
     } catch (err) {
       console.error(err)
-      setError(err?.response?.data?.error || t('form.errors.server_error'))
+      const errKey = err?.response?.data?.error
+      setError(errKey ? t(errKey) : t('form.errors.server_error'))
     } finally {
       setLoading(false)
     }

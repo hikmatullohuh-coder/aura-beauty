@@ -1,33 +1,13 @@
-import nodemailer from 'nodemailer'
-import prisma from '../../../lib/prisma'
-
-async function verifyRecaptcha(token, ip) {
-  const secret = process.env.RECAPTCHA_SECRET_KEY
-  if (!secret) return true // allow if not configured
-  try {
-    const res = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ secret, response: token, remoteip: ip })
-    })
-    const json = await res.json()
-    return json.success && (json.score ? json.score >= 0.5 : true)
-  } catch (e) {
-    console.error('recaptcha verify error', e)
-    return false
-  }
-}
-
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'system.method_not_allowed' })
   const { name, email, phone, topic, message, recaptchaToken } = req.body
   if (!name || !email || !topic || !message) {
-    return res.status(400).json({ error: 'Missing required fields' })
+    return res.status(400).json({ error: 'validation.required_fields' })
   }
 
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
   const ok = await verifyRecaptcha(recaptchaToken, ip)
-  if (!ok) return res.status(400).json({ error: 'reCAPTCHA verification failed' })
+  if (!ok) return res.status(400).json({ error: 'support.recaptcha_failed' })
 
   try {
     const ticket = await prisma.supportTicket.create({
@@ -80,6 +60,6 @@ export default async function handler(req, res) {
     return res.status(201).json({ success: true })
   } catch (err) {
     console.error(err)
-    return res.status(500).json({ error: 'Server error' })
+    return res.status(500).json({ error: 'system.server_error' })
   }
 }
