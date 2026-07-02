@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 export default function AdminSupportList() {
+  const { t } = useTranslation()
   const [tickets, setTickets] = useState([])
   const [search, setSearch] = useState('')
   const router = useRouter()
@@ -18,53 +20,50 @@ export default function AdminSupportList() {
         router.push('/admin/login')
         return
       }
-      toast.error('Не удалось загрузить обращения')
+      toast.error(t('toast.save_error'))
     }
   }
 
   useEffect(() => {
-    // check auth
     axios.get('/api/admin/me').then(() => {
       fetchTickets()
-      // init socket endpoint
       fetch('/api/socket')
       if (typeof window !== 'undefined' && window.__SOCKET__) {
         window.__SOCKET__.on('support:new', data => {
-          toast.info('Новый запрос поддержки: ' + (data.name || '—'))
+          toast.info(t('toast.new_ticket', { name: data.name || '—' }))
           fetchTickets()
         })
         window.__SOCKET__.on('support:updated', data => {
-          toast.info(`Обращение #${data.ticketId} обновлено: ${data.status}`)
+          toast.info(t('toast.ticket_updated', { id: data.ticketId, status: data.status }))
           fetchTickets()
         })
       }
     }).catch(() => router.push('/admin/login'))
   }, [])
 
-  const filtered = tickets.filter(t => {
+  const filtered = tickets.filter(ti => {
     if (!search) return true
     const s = search.toLowerCase()
-    return (t.name || '').toLowerCase().includes(s) || (t.email || '').toLowerCase().includes(s) || (t.orderNumber || '').toLowerCase().includes(s)
+    return (ti.name || '').toLowerCase().includes(s) || (ti.email || '').toLowerCase().includes(s)
   })
 
   return (
     <div className="container">
-      <h1>Админ — Поддержка</h1>
-      <input placeholder="Поиск по имени, email, номеру заказа" value={search} onChange={e => setSearch(e.target.value)} />
+      <h1>{t('admin.support_section')}</h1>
+      <input placeholder={t('admin.search_placeholder')} value={search} onChange={e => setSearch(e.target.value)} />
       <table>
         <thead>
-          <tr><th>ID</th><th>Имя</th><th>Email</th><th>Заказ</th><th>Тема</th><th>Статус</th><th>Дата</th></tr>
+          <tr><th>{t('list.headers.id')}</th><th>{t('list.headers.name')}</th><th>{t('list.headers.email')}</th><th>{t('list.headers.topic')}</th><th>{t('list.headers.status')}</th><th>{t('list.headers.date')}</th></tr>
         </thead>
         <tbody>
-          {filtered.map(t => (
-            <tr key={t.id}>
-              <td><a href={`/admin/support/${t.id}`}>{t.id}</a></td>
-              <td>{t.name}</td>
-              <td>{t.email}</td>
-              <td>{t.orderNumber || '-'}</td>
-              <td>{t.topic}</td>
-              <td>{t.status}</td>
-              <td>{new Date(t.createdAt).toLocaleString()}</td>
+          {filtered.map(tk => (
+            <tr key={tk.id}>
+              <td><a href={`/admin/support/${tk.id}`}>{tk.id}</a></td>
+              <td>{tk.name}</td>
+              <td>{tk.email}</td>
+              <td>{tk.topic}</td>
+              <td>{tk.status}</td>
+              <td>{new Date(tk.createdAt).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>

@@ -1,12 +1,12 @@
 import '../styles/globals.css'
 import { useEffect } from 'react'
 import { io } from 'socket.io-client'
+import '../lib/i18n'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    // connect socket client to receive admin notifications (only for admin pages)
     if (typeof window === 'undefined') return
     const socket = io()
     window.__SOCKET__ = socket

@@ -12,14 +12,12 @@ model SupportTicket {
   name         String
   email        String
   phone        String?
-  orderNumber  String?           @map("order_number")
   topic        String
   status       String            @default("new")
   messages     SupportMessage[]
   createdAt    DateTime          @default(now()) @map("created_at")
   updatedAt    DateTime          @updatedAt @map("updated_at")
   @@index([email])
-  @@index([orderNumber])
 }
 
 model SupportMessage {

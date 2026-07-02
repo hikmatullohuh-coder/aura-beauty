@@ -11,7 +11,6 @@ async function verifyRecaptcha(token, ip) {
       body: new URLSearchParams({ secret, response: token, remoteip: ip })
     })
     const json = await res.json()
-    // For v3, check score threshold
     return json.success && (json.score ? json.score >= 0.5 : true)
   } catch (e) {
     console.error('recaptcha verify error', e)
@@ -21,7 +20,7 @@ async function verifyRecaptcha(token, ip) {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
-  const { name, email, phone, orderNumber, topic, message, recaptchaToken } = req.body
+  const { name, email, phone, topic, message, recaptchaToken } = req.body
   if (!name || !email || !topic || !message) {
     return res.status(400).json({ error: 'Missing required fields' })
   }
@@ -36,7 +35,6 @@ export default async function handler(req, res) {
         name,
         email,
         phone: phone || null,
-        orderNumber: orderNumber || null,
         topic,
         status: 'new',
         messages: {
@@ -63,7 +61,7 @@ export default async function handler(req, res) {
         from: `${name} <${email}>`,
         to: supportEmail,
         subject: `Новый запрос поддержки — ${topic}`,
-        text: `Новый запрос\n\nИмя: ${name}\nEmail: ${email}\nТелефон: ${phone || '-'}\nНомер заказа: ${orderNumber || '-'}\nТема: ${topic}\n\nСообщение:\n${message}`
+        text: `Новый запрос\n\nИмя: ${name}\nEmail: ${email}\nТелефон: ${phone || '-'}\nТема: ${topic}\n\nСообщение:\n${message}`
       }
 
       transporter.sendMail(mailOptions).catch(err => console.error('sendMail error', err))
