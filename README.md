@@ -10,14 +10,21 @@ Environment variables (example):
 - SMTP_PORT=587
 - SMTP_USER=
 - SMTP_PASS=
+- SMTP_SECURE=false
 - RECAPTCHA_SECRET_KEY=
 - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
+- NEXT_PUBLIC_SITE_URL=http://localhost:3000
+- SEED_ADMIN_EMAIL=admin@aura-beauty.test
+- SEED_ADMIN_PASSWORD=password123
 
 How it works:
 - Public page: /support — form that POSTs to /api/support
 - Admin list: /admin/support — lists tickets
 - Admin detail: /admin/support/[id] — view, reply, change status
 - Socket server: /api/socket initializes socket.io and allows server->clients notifications
+
+Seeding admin:
+- Run `npm run seed` to create an admin user (email/password from env or defaults).
 
 Notes:
 - reCAPTCHA v3 is supported. If keys not provided, verification is skipped (useful for local dev).

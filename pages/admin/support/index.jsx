@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export default function AdminSupportList() {
   const [tickets, setTickets] = useState([])
   const [search, setSearch] = useState('')
 
   const fetchTickets = async () => {
-    const res = await axios.get('/api/admin/support')
-    setTickets(res.data || [])
+    try {
+      const res = await axios.get('/api/admin/support')
+      setTickets(res.data || [])
+    } catch (e) {
+      console.error(e)
+      toast.error('Не удалось загрузить обращения')
+    }
   }
 
   useEffect(() => {
@@ -16,8 +22,11 @@ export default function AdminSupportList() {
     fetch('/api/socket')
     if (typeof window !== 'undefined' && window.__SOCKET__) {
       window.__SOCKET__.on('support:new', data => {
-        // show simple notification and refresh list
-        alert('Новый запрос поддержки: ' + data.name)
+        toast.info('Новый запрос поддержки: ' + (data.name || '—'))
+        fetchTickets()
+      })
+      window.__SOCKET__.on('support:updated', data => {
+        toast.info(`Обращение #${data.ticketId} обновлено: ${data.status}`)
         fetchTickets()
       })
     }

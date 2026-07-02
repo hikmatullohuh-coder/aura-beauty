@@ -30,3 +30,11 @@ model SupportMessage {
   message   String
   createdAt DateTime  @default(now()) @map("created_at")
 }
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+}
