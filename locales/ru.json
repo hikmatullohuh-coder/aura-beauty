@@ -1,0 +1,133 @@
+{
+  "site": {
+    "title": "Aura Beauty",
+    "currency": "UZS"
+  },
+  "nav": {
+    "home": "Главная",
+    "support": "Поддержка",
+    "admin": "Админ"
+  },
+  "home": {
+    "title": "Добро пожаловать в Aura Beauty",
+    "description": "Онлайн‑сервис поддержки клиентов Aura Beauty."
+  },
+  "support": {
+    "title": "Поддержка и обратная связь",
+    "description": "Свяжитесь с нашей службой поддержки по любым вопросам."
+  },
+  "form": {
+    "labels": {
+      "name": "Имя",
+      "email": "Email",
+      "phone": "Номер телефона",
+      "topic": "Тема обращения",
+      "message": "Сообщение"
+    },
+    "placeholders": {
+      "name": "Введите ваше имя",
+      "email": "example@mail.ru",
+      "phone": "+998 90 123 45 67",
+      "message": "Опишите вашу проблему или вопрос"
+    },
+    "topics": {
+      "general": "Общий вопрос",
+      "complaint": "Жалоба",
+      "suggestion": "Предложение",
+      "review": "Отзыв",
+      "partnership": "Сотрудничество",
+      "other": "Другое"
+    },
+    "submit": "Отправить",
+    "success": "Спасибо за обращение! Команда Aura Beauty получила ваше сообщение и ответит вам в ближайшее время.",
+    "sending": "Отправка...",
+    "errors": {
+      "recaptcha_failed": "Проверка reCAPTCHA не пройдена. Повторите попытку.",
+      "server_error": "Ошибка сервера. Попробуйте позже."
+    }
+  },
+  "validation": {
+    "required": "Обязательное поле",
+    "invalid_email": "Неверный формат email",
+    "min_length": "Минимальная длина: {{count}} символов",
+    "password_mismatch": "Пароли не совпадают"
+  },
+  "auth": {
+    "admin": {
+      "login_title": "Вход — админ",
+      "email": "Email администратора",
+      "password": "Пароль",
+      "login_button": "Войти",
+      "logout_button": "Выйти",
+      "invalid_credentials": "Неверные учетные данные"
+    }
+  },
+  "admin": {
+    "panel_title": "Панель администратора",
+    "support_section": "Поддержка",
+    "profile": "Профиль",
+    "search_placeholder": "Поиск по имени и email",
+    "status": {
+      "new": "Новое",
+      "processing": "В обработке",
+      "closed": "Закрыто"
+    }
+  },
+  "list": {
+    "title": "Список обращений",
+    "headers": {
+      "id": "ID",
+      "name": "Имя",
+      "email": "Email",
+      "topic": "Тема",
+      "status": "Статус",
+      "date": "Дата",
+      "actions": "Действия"
+    },
+    "empty": "Обращений нет"
+  },
+  "ticket": {
+    "title": "Обращение",
+    "history": "История переписки",
+    "reply_placeholder": "Введите ответ администратора",
+    "reply_button": "Отправить ответ",
+    "mark_processing": "Пометить: В обработке",
+    "mark_closed": "Пометить: Закрыто",
+    "no_messages": "Сообщений ещё нет"
+  },
+  "profile": {
+    "title": "Профиль — смена пароля",
+    "change_password": "Смена пароля",
+    "fields": {
+      "old_password": "Старый пароль",
+      "new_password": "Новый пароль",
+      "confirm_password": "Подтверждение нового пароля"
+    },
+    "change_button": "Сменить пароль",
+    "success_password_changed": "Пароль успешно изменён. Пожалуйста, войдите снова.",
+    "errors": {
+      "old_password_invalid": "Старый пароль неверен",
+      "password_too_short": "Новый пароль слишком короткий (минимум 8 символов)",
+      "password_same_as_old": "Новый пароль должен отличаться от старого"
+    }
+  },
+  "toast": {
+    "new_ticket": "Новое обращение: {{name}}",
+    "ticket_updated": "Обращение #{{id}} обновлено: {{status}}",
+    "save_success": "Успешно сохранено",
+    "save_error": "Ошибка сохранения",
+    "password_changed": "Пароль изменён",
+    "reply_sent": "Ответ отправлен пользователю",
+    "ticket_closed": "Обращение закрыто",
+    "ticket_processing": "Обращение помечено как 'В обработке'"
+  },
+  "system": {
+    "loading": "Загрузка...",
+    "unauthorized": "Требуется авторизация",
+    "forbidden": "Доступ запрещён",
+    "not_found": "Не найдено",
+    "connected": "Установлено соединение с сервером",
+    "disconnected": "Соединение с сервером разорвано",
+    "reconnecting": "Повторное подключение..."
+  }
+}

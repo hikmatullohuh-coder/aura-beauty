@@ -1,0 +1,133 @@
+{
+  "site": {
+    "title": "Aura Beauty",
+    "currency": "UZS"
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "support": "Qo'llab‑quvvatlash",
+    "admin": "Admin"
+  },
+  "home": {
+    "title": "Aura Beauty ga xush kelibsiz",
+    "description": "Aura Beauty mijozlarni qo'llab‑quvvatlash xizmati."
+  },
+  "support": {
+    "title": "Qo'llab‑quvvatlash va fikr‑mulohaza",
+    "description": "Savollaringiz bo'lsa, biz bilan bog'laning."
+  },
+  "form": {
+    "labels": {
+      "name": "Ism",
+      "email": "Email",
+      "phone": "Telefon raqam",
+      "topic": "Murojaat mavzusi",
+      "message": "Xabar"
+    },
+    "placeholders": {
+      "name": "Ismingizni kiriting",
+      "email": "misol@mail.uz",
+      "phone": "+998 90 123 45 67",
+      "message": "Muammo yoki savolingizni yozing"
+    },
+    "topics": {
+      "general": "Umumiy savol",
+      "complaint": "Shikoyat",
+      "suggestion": "Taklif",
+      "review": "Fikr",
+      "partnership": "Hamkorlik",
+      "other": "Boshqa"
+    },
+    "submit": "Yuborish",
+    "success": "Xabaringiz uchun rahmat! Aura Beauty jamoasi murojaatingizni qabul qildi va tez orada siz bilan bog‘lanadi.",
+    "sending": "Yuborilmoqda...",
+    "errors": {
+      "recaptcha_failed": "reCAPTCHA tekshiruvi o'tmadi. Qayta urinib ko'ring.",
+      "server_error": "Server xatosi. Keyinroq urinib ko'ring."
+    }
+  },
+  "validation": {
+    "required": "Majburiy maydon",
+    "invalid_email": "Email noto'g'ri formatda",
+    "min_length": "Minimal uzunlik: {{count}} belgidan iborat bo'lishi kerak",
+    "password_mismatch": "Parollar mos kelmadi"
+  },
+  "auth": {
+    "admin": {
+      "login_title": "Kirish — admin",
+      "email": "Administrator email",
+      "password": "Parol",
+      "login_button": "Kirish",
+      "logout_button": "Chiqish",
+      "invalid_credentials": "Noto'g'ri ma'lumotlar"
+    }
+  },
+  "admin": {
+    "panel_title": "Administrator paneli",
+    "support_section": "Qo'llab‑quvvatlash",
+    "profile": "Profil",
+    "search_placeholder": "Ism va email bo'yicha qidirish",
+    "status": {
+      "new": "Yangi",
+      "processing": "Ko'rib chiqilmoqda",
+      "closed": "Yopilgan"
+    }
+  },
+  "list": {
+    "title": "Murojaatlar ro'yxati",
+    "headers": {
+      "id": "ID",
+      "name": "Ism",
+      "email": "Email",
+      "topic": "Mavzu",
+      "status": "Holat",
+      "date": "Sana",
+      "actions": "Harakatlar"
+    },
+    "empty": "Murojaatlar mavjud emas"
+  },
+  "ticket": {
+    "title": "Murojaat",
+    "history": "Muloqot tarixi",
+    "reply_placeholder": "Administrator javobini kiriting",
+    "reply_button": "Javob yuborish",
+    "mark_processing": "Holat: Ko'rib chiqilmoqda",
+    "mark_closed": "Holat: Yopilgan",
+    "no_messages": "Hali xabarlar yo'q"
+  },
+  "profile": {
+    "title": "Administrator profili",
+    "change_password": "Parolni o'zgartirish",
+    "fields": {
+      "old_password": "Eski parol",
+      "new_password": "Yangi parol",
+      "confirm_password": "Yangi parolni tasdiqlash"
+    },
+    "change_button": "Parolni o'zgartirish",
+    "success_password_changed": "Parol muvaffaqiyatli o'zgartirildi. Iltimos, qayta kiring.",
+    "errors": {
+      "old_password_invalid": "Eski parol noto'g'ri",
+      "password_too_short": "Yangi parol juda qisqa (kamida 8 belgidan bo'lishi kerak)",
+      "password_same_as_old": "Yangi parol eski paroldan farq qilishi kerak"
+    }
+  },
+  "toast": {
+    "new_ticket": "Yangi murojaat: {{name}}",
+    "ticket_updated": "Murojaat #{{id}} yangilandi: {{status}}",
+    "save_success": "Muvaffaqiyatli saqlandi",
+    "save_error": "Saqlashda xato",
+    "password_changed": "Parol o'zgartirildi",
+    "reply_sent": "Javob foydalanuvchiga yuborildi",
+    "ticket_closed": "Murojaat yopildi",
+    "ticket_processing": "Murojaat ko'rib chiqilmoqda"
+  },
+  "system": {
+    "loading": "Yuklanmoqda...",
+    "unauthorized": "Avtorizatsiya talab etiladi",
+    "forbidden": "Kirish man etildi",
+    "not_found": "Topilmadi",
+    "connected": "Server bilan bog'lanish o'rnatildi",
+    "disconnected": "Server bilan bog'lanish uzildi",
+    "reconnecting": "Qayta ulanmoqda..."
+  }
+}
