@@ -1,10 +1,14 @@
 import prisma from '../../../../../lib/prisma'
 import nodemailer from 'nodemailer'
+import { getAdminFromReq } from '../../../../../lib/auth'
 
 export default async function handler(req, res) {
+  const admin = await getAdminFromReq(req)
+  if (!admin) return res.status(401).json({ error: 'Unauthorized' })
+
   const { id } = req.query
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
-  const { message, adminName } = req.body
+  const { message } = req.body
   if (!message) return res.status(400).json({ error: 'Message required' })
 
   try {
@@ -32,7 +36,7 @@ export default async function handler(req, res) {
       })
 
       const mailOptions = {
-        from: `${adminName || 'Aura Beauty'} <${process.env.SMTP_USER}>`,
+        from: `${admin.name || 'Aura Beauty'} <${process.env.SMTP_USER}>`,
         to: ticket.email,
         subject: `Ответ по вашему обращению #${ticket.id}`,
         text: `Здравствуйте ${ticket.name},\n\nНаш ответ: \n${message}\n\nС уважением, Aura Beauty`

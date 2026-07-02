@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 export default function AdminSupportList() {
   const [tickets, setTickets] = useState([])
   const [search, setSearch] = useState('')
+  const router = useRouter()
 
   const fetchTickets = async () => {
     try {
@@ -12,24 +14,31 @@ export default function AdminSupportList() {
       setTickets(res.data || [])
     } catch (e) {
       console.error(e)
+      if (e.response && e.response.status === 401) {
+        router.push('/admin/login')
+        return
+      }
       toast.error('Не удалось загрузить обращения')
     }
   }
 
   useEffect(() => {
-    fetchTickets()
-    // init socket endpoint
-    fetch('/api/socket')
-    if (typeof window !== 'undefined' && window.__SOCKET__) {
-      window.__SOCKET__.on('support:new', data => {
-        toast.info('Новый запрос поддержки: ' + (data.name || '—'))
-        fetchTickets()
-      })
-      window.__SOCKET__.on('support:updated', data => {
-        toast.info(`Обращение #${data.ticketId} обновлено: ${data.status}`)
-        fetchTickets()
-      })
-    }
+    // check auth
+    axios.get('/api/admin/me').then(() => {
+      fetchTickets()
+      // init socket endpoint
+      fetch('/api/socket')
+      if (typeof window !== 'undefined' && window.__SOCKET__) {
+        window.__SOCKET__.on('support:new', data => {
+          toast.info('Новый запрос поддержки: ' + (data.name || '—'))
+          fetchTickets()
+        })
+        window.__SOCKET__.on('support:updated', data => {
+          toast.info(`Обращение #${data.ticketId} обновлено: ${data.status}`)
+          fetchTickets()
+        })
+      }
+    }).catch(() => router.push('/admin/login'))
   }, [])
 
   const filtered = tickets.filter(t => {

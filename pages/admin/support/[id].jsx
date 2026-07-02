@@ -10,21 +10,29 @@ export default function TicketDetail() {
 
   const fetchTicket = async () => {
     if (!id) return
-    const res = await axios.get(`/api/admin/support/${id}`)
-    setTicket(res.data)
+    try {
+      const res = await axios.get(`/api/admin/support/${id}`)
+      setTicket(res.data)
+    } catch (e) {
+      if (e.response && e.response.status === 401) {
+        router.push('/admin/login')
+        return
+      }
+      console.error(e)
+    }
   }
 
   useEffect(() => { fetchTicket() }, [id])
 
   const sendReply = async () => {
     if (!message) return
-    await axios.post(`/api/admin/support/${id}/reply`, { message, adminName: 'Администратор' })
+    await axios.post(`/api/admin/support/${id}/reply`, { message })
     setMessage('')
     fetchTicket()
   }
 
   const changeStatus = async (status) => {
-    await axios.patch(`/api/admin/support/${id}/status`, { status })
+    await axios.patch(`/api/admin/support/${id}`, { status })
     fetchTicket()
   }
 
